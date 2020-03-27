@@ -45,4 +45,4 @@ Now you're ready to demo the website. Your application should start automaticall
 <em>Note: <br />
   In order to make the best use of the 'user update support feature', two accounts
   should be created. <br />
-There are no limits on supporter incrementation amount for ideal demonstration purposes</em>
+  There are no limits on supporter incrementation amount for ideal demonstration purposes</em>
