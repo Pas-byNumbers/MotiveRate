@@ -1,7 +1,7 @@
 # MotiveRate
 An app that promotes goal achieving and motivation built around social media and gamified points-based systems.
 
-<h1>Installation</h1>
+<h2>Installation</h2>
 
 <em>This App requires 
   <ul>
@@ -21,7 +21,7 @@ For the first terminal window, enter <code>cd MotiveRate-Api/</code> (Back-End)
   For the second terminal window, enter <code>cd motiverate-client/</code> (Front-End)
 </p>
 
-<h2>Back-End</h2>
+<h4>Back-End</h4>
 
 To set up the server, run the following commands in the rails directory
 
@@ -30,7 +30,7 @@ $ bundle install
 $ rails db:migrate:reset db:seed
 $ rails s
 ```
-<h2>Front-End</h2>
+<h4>Front-End</h4>
 
 To set up the client-side, run the following commands in the react directory
 
@@ -40,3 +40,8 @@ $ npm start
 ```
 
 Now you're ready to demo the website. Your application should start automatically
+<br />
+<br />
+<em>Note: In order to make the best use of the 'user update support feature', two accounts <br />
+  should be created. <br />
+There are no limits on supporter incrementation amount for ideal demonstration purposes</em>
