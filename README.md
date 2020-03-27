@@ -42,6 +42,7 @@ $ npm start
 Now you're ready to demo the website. Your application should start automatically
 <br />
 <br />
-<em>Note: In order to make the best use of the 'user update support feature', two accounts <br />
+<em>Note: <br />
+  In order to make the best use of the 'user update support feature', two accounts
   should be created. <br />
 There are no limits on supporter incrementation amount for ideal demonstration purposes</em>
