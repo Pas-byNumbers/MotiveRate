@@ -5,6 +5,7 @@ import { fetchAllUpdates, incrementSupport } from "../actions/updateActions";
 import { fetchAllGoals } from "../actions/goalActions";
 import { fetchAllUsers } from "../actions/userActions";
 import UpdateCard from "../components/cards/UpdateCard";
+import { formatDateTime } from '../utilityFunctions'
 
 const useStyles = makeStyles({
   div: {
@@ -31,16 +32,6 @@ const UpdatesContainer = props => {
       goal => Number(goal.id) === Number(goalId)
     );
     return goal;
-  };
-
-  const formatDateTime = goalDate => {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    };
-    return new Date(goalDate).toLocaleDateString(undefined, options);
   };
 
   const incrementSupporters = updateId => {

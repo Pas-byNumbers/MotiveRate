@@ -13,6 +13,7 @@ import GoalContainer from "./GoalContainer";
 import UserUpdatesContainer from "./UserUpdatesContainer";
 import ArchiveContainer from "./ArchiveContainer";
 import EditorPane from "../components/editorComponents/EditorPane";
+import { formatDateTime } from '../utilityFunctions'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -97,23 +98,13 @@ const UserItemsContainer = props => {
     return userUpdates;
   };
 
-  const formatDateTime = goalDate => {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    };
-    return new Date(goalDate).toLocaleDateString(undefined, options);
-  };
-
   const consolidatePoints = goalId => {
     const supportTally = filterUserUpdates()
       .filter(update => Number(update.attributes.goal_id) === goalId)
       .map(update => update.attributes.supporters);
     return supportTally.reduce((a, b) => a + b, 0);
   };
-  
+
   const completeGoal = goalId => {
     const totalPoints = consolidatePoints(goalId);
     props.goalUpdate({

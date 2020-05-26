@@ -55,7 +55,7 @@ function LogInModal(props) {
     setUsername("");
     setPassword("");
     handleClose();
-    history.push('/profile')
+    // history.push('/profile')
   };
 
   return (

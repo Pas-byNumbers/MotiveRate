@@ -83,7 +83,7 @@ function SignUpModal(props) {
     setLastName("");
     setEmail("");
     handleClose();
-    history.push('/profile')
+    // history.push('/profile')
   };
 
   return (
