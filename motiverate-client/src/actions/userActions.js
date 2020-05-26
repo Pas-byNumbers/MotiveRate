@@ -1,4 +1,5 @@
-import { useHistory } from 'react-router-dom'
+import { fetchAllGoals } from './goalActions'
+import { fetchAllUpdates } from './updateActions'
 
 const loginUser = userObj => ({
   type: "LOGIN_USER",
@@ -67,7 +68,9 @@ export const userUpdate = user => {
     } else {
       localStorage.setItem("token", credentials.jwt);
       dispatch(loginUser(credentials.user));
-    } 
+    }
+    dispatch(fetchAllGoals());
+    dispatch(fetchAllUpdates()) 
   }
 }
 
