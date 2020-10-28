@@ -49,7 +49,7 @@ const UpdatesContainer = props => {
   return (
     <div className={classes.div}>
       {useFetching()}
-      {props.updateData
+      {props.currentUser && props.updateData
         ? props.updateData.map(update => (
             <UpdateCard
               incrementSupporters={incrementSupporters}

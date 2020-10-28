@@ -16,6 +16,7 @@ import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import ViewModal from '../components/ViewModal';
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { capitalizeString } from "../utilityFunctions"
 
 const useStyles = makeStyles({
   table: {
@@ -43,10 +44,6 @@ export default function ArchiveContainer({
   openEditorPane,
  }) {
   const classes = useStyles();
-
-  const capitalizeCategory = category => {
-   return category.charAt(0).toUpperCase() + category.slice(1)
-  }
 
  
 
@@ -84,7 +81,7 @@ export default function ArchiveContainer({
               <TableCell component="th" scope="row">
                 {goal.attributes.title}
               </TableCell>
-              <TableCell align="center">{capitalizeCategory(goal.attributes.category)}</TableCell>
+              <TableCell align="center">{capitalizeString(goal.attributes.category)}</TableCell>
               <TableCell align="center">{formatDateTime(goal.attributes.deadline)}</TableCell>
               <TableCell align="center">{goal.attributes.completed ? <DoneOutlineIcon /> : "Ongoing"}</TableCell>
               <TableCell align="center">

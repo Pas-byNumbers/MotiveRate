@@ -37,7 +37,6 @@ const UserCard = ({ currentUser, handleLogOut }) => {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [score, setScore] = useState(0);
-  const [tier, setTier] = useState("");
   const [email, setEmail] = useState("");
   const [showSettings, setShowSettings] = useState(false);
 
@@ -45,7 +44,6 @@ const UserCard = ({ currentUser, handleLogOut }) => {
     setUsername(currentUser.attributes.username);
     setFullName(currentUser.attributes.full_name);
     setScore(currentUser.attributes.score);
-    setTier(currentUser.attributes.tier);
     setEmail(currentUser.attributes.email);
   };
 
@@ -53,7 +51,6 @@ const UserCard = ({ currentUser, handleLogOut }) => {
     setUsername("");
     setFullName("");
     setScore(0);
-    setTier("");
     setEmail("");
   };
 
@@ -61,8 +58,15 @@ const UserCard = ({ currentUser, handleLogOut }) => {
     setShowSettings(!showSettings);
   };
 
+  const checkCurrentUser = () => {
+    currentUser.attributes ? 
+      updateProfileState() 
+      : 
+      clearProfileState()
+  }
+
   useEffect(() => {
-    return currentUser ? updateProfileState() : clearProfileState();
+    checkCurrentUser()
   });
 
   return (

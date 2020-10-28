@@ -5,6 +5,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
+import { capitalizeString } from "../utilityFunctions"
 
 
 
@@ -68,7 +69,7 @@ export default function ViewModal({
           </p>
           <h5>Category</h5>
           <p id="simple-modal-category">
-          {goal.attributes.category}
+          {capitalizeString(goal.attributes.category)}
           </p>
           <h5>Deadline</h5>
           <p id="simple-modal-deadline">

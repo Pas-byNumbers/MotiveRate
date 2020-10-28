@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import ViewModal from './ViewModal';
+import { capitalizeString } from '../utilityFunctions'
 
 
 const useStyles = makeStyles({
@@ -34,11 +35,6 @@ export default function GoalList({
   archiveGoal
  }) {
   const classes = useStyles();
-
-  const capitalizeCategory = category => {
-   return category.charAt(0).toUpperCase() + category.slice(1)
-  }
-
  
 
   return (
@@ -67,7 +63,7 @@ export default function GoalList({
               <TableCell component="th" scope="row">
                 {goal.attributes.title}
               </TableCell>
-              <TableCell align="center">{capitalizeCategory(goal.attributes.category)}</TableCell>
+              <TableCell align="center">{capitalizeString(goal.attributes.category)}</TableCell>
               <TableCell align="center">{formatDateTime(goal.attributes.deadline)}</TableCell>
               <TableCell align="center">{goal.attributes.completed ? <DoneOutlineIcon /> : "Ongoing"}</TableCell>
               <TableCell align="center">

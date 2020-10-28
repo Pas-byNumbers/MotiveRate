@@ -1,9 +1,10 @@
 import { fetchAllGoals } from './goalActions'
 import { fetchAllUpdates } from './updateActions'
 
+
 const loginUser = userObj => ({
   type: "LOGIN_USER",
-  payload: userObj
+  payload: userObj.data
 });
 
 export const logoutUser = () => ({
@@ -18,7 +19,7 @@ export const fetchAllUsers = () => {
       .then(users => {
         dispatch({
           type: "RECEIVE_USERS",
-          users: users.data
+          payload: users.data
         });
       });
   };

@@ -14,7 +14,7 @@ export const usersReducer = (state = {
     case 'RECEIVE_USERS' :
       return {
         ...state,
-        userList: action.users,
+        userList: action.payload,
         loading: false
       }
     case 'LOGIN_USER' :

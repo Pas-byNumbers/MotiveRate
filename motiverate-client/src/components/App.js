@@ -12,6 +12,13 @@ import UpdatesContainer from "../containers/UpdatesContainer";
 
 
 class App extends Component {
+  // constructor(props) {
+  //   super()
+  //   this.state = {
+  //     currentUser: props.currentUser
+  //   }
+  // }
+
   componentDidMount() {
     this.props.getProfileFetch();
   }
@@ -37,10 +44,10 @@ class App extends Component {
         )}
         <Switch>
           <Route path="/profile">
-            <ProfileContainer currentUser={this.props.currentUser.data} />
+            <ProfileContainer currentUser={this.props.currentUser} />
           </Route>
           <Route path="/updates">
-            <UpdatesContainer currentUser={this.props.currentUser.data} />
+            <UpdatesContainer currentUser={this.props.currentUser} />
           </Route>
           <Route exact path="/" component={LandingPageContainer} />
           {/* <Route path="/signup" component={SignUpForm} /> */}
