@@ -63,7 +63,7 @@ function SignUpModal(props) {
     setEmail(event.target.value);
   };
 
-  const history = useHistory()
+  // const history = useHistory()
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -165,16 +165,6 @@ function SignUpModal(props) {
                 id="standard-disabled"
                 variant="outlined"
               />
-
-              {/* <br />
-              <TextField
-                disabled
-                name="tier"
-                label="Tier"
-                value={tier.charAt(0).toUpperCase() + tier.slice(1)}
-                id="standard-disabled"
-                variant="outlined"
-              /> */}
 
               <br />
               <br />

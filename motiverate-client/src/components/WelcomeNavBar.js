@@ -30,7 +30,6 @@ export default function WelcomeNavBar(props) {
 
   const welcomeButtons = () => (
     <div>
-      {/* <Button color="inherit">Features</Button> */}
       <SignUpModal />
       <LogInModal />
     </div>
@@ -54,7 +53,6 @@ export default function WelcomeNavBar(props) {
               height="40px"
               width="60px"
             ></img>
-            {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             MotiveRate

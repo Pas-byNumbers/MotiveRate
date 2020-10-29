@@ -46,7 +46,7 @@ function LogInModal(props) {
     setPassword(event.target.value);
   };
 
-  const history = useHistory()
+  // const history = useHistory()
 
   const handleSubmit = event => {
     event.preventDefault();

@@ -13,7 +13,7 @@ const ProfileContainer = ({ currentUser, handleLogOut }) => {
     <div>
   
       {
-        (currentUser && localStorage.token) ? 
+        (currentUser.attributes && localStorage.token) ? 
         (
           <div>
           <UserCard currentUser={currentUser} handleLogOut={handleLogOut} />

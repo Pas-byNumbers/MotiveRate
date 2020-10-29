@@ -5,7 +5,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
-import { capitalizeString } from "../utilityFunctions"
+import { capitalizeString } from "../../utilityFunctions"
 
 
 

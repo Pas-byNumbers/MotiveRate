@@ -13,7 +13,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
-import ViewModal from '../components/ViewModal';
+import ViewModal from '../components/userModals/ViewModal';
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { capitalizeString } from "../utilityFunctions"
