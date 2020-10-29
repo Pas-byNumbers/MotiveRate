@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { userCreate } from "../../actions/userActions";
 import { Typography } from "@material-ui/core";
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -62,6 +63,8 @@ function SignUpModal(props) {
     setEmail(event.target.value);
   };
 
+  // const history = useHistory()
+
   const handleSubmit = event => {
     event.preventDefault();
     const userInfo = {
@@ -80,6 +83,7 @@ function SignUpModal(props) {
     setLastName("");
     setEmail("");
     handleClose();
+    // history.push('/profile')
   };
 
   return (
@@ -161,16 +165,6 @@ function SignUpModal(props) {
                 id="standard-disabled"
                 variant="outlined"
               />
-
-              {/* <br />
-              <TextField
-                disabled
-                name="tier"
-                label="Tier"
-                value={tier.charAt(0).toUpperCase() + tier.slice(1)}
-                id="standard-disabled"
-                variant="outlined"
-              /> */}
 
               <br />
               <br />

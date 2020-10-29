@@ -1,3 +1,5 @@
+import { fetchAllUpdates } from "./updateActions"
+
 export const fetchAllGoals = () => {
   return dispatch => {
     dispatch({ type: "LOADING_GOALS" });
@@ -28,6 +30,7 @@ export const goalDelete = goal => {
       }
     );
     dispatch(fetchAllGoals());
+    dispatch(fetchAllUpdates())
   };
 };
 
@@ -60,5 +63,6 @@ export const goalUpdate = goal => {
       body: JSON.stringify({ goal })
     });
     dispatch(fetchAllGoals());
+    dispatch(fetchAllUpdates())
   };
 };

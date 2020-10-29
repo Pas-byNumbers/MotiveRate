@@ -38,9 +38,10 @@ const EditorPane = ({
   filterUserGoals,
   filterUserUpdates
 }) => {
+  
   const classes = useStyles();
   const [category, setCategory] = React.useState("");
-  const [deadline, setDeadline] = React.useState();
+  const [deadline, setDeadline] = React.useState(new Date());
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [goalId, setGoalId] = React.useState();

@@ -18,9 +18,6 @@ const useStyles = makeStyles(theme => ({
 const CategorySelect = props => {
   const classes = useStyles();
 
-  const capitalizeCategory = category => {
-    return category.charAt(0).toUpperCase() + category.slice(1);
-  };
 
   return (
     <FormControl className={classes.formControl}>

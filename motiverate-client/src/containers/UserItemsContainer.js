@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react'
-import { connect } from "react-redux"
-import { userUpdate } from "../actions/userActions"
-import { fetchAllGoals, goalUpdate } from "../actions/goalActions"
-import { fetchAllUpdates } from "../actions/updateActions"
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { userUpdate } from "../actions/userActions";
+import { fetchAllGoals, goalUpdate } from "../actions/goalActions";
+import { fetchAllUpdates } from "../actions/updateActions";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Paper, Typography, Divider } from '@material-ui/core';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import PropTypes from 'prop-types';
-import Box from '@material-ui/core/Box';
-import GoalContainer from "./GoalContainer"
-import UserUpdatesContainer from "./UserUpdatesContainer"
-import ArchiveContainer from "./ArchiveContainer"
+import { Paper, Typography, Divider } from "@material-ui/core";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import PropTypes from "prop-types";
+import Box from "@material-ui/core/Box";
+import GoalContainer from "./GoalContainer";
+import UserUpdatesContainer from "./UserUpdatesContainer";
+import ArchiveContainer from "./ArchiveContainer";
 import EditorPane from "../components/editorComponents/EditorPane";
+import { formatDateTime } from '../utilityFunctions'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -34,7 +35,7 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 // function a11yProps(index) {
@@ -50,19 +51,19 @@ const useStyles = makeStyles(theme => ({
     minHeight: 500
   },
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 }));
 
-const UserItemsContainer = (props) => {
+const UserItemsContainer = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [editorPane, setEditorPane] = React.useState({
     active: false,
     type: "",
-    action: "",
-  })
+    action: ""
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -72,139 +73,136 @@ const UserItemsContainer = (props) => {
     setEditorPane({
       ...editorPane,
       active: false
-    })
-  }
+    });
+  };
 
   const openEditorPane = (typeSelected, actionSelected) => {
     setEditorPane({
       active: true,
       type: typeSelected,
       action: actionSelected
-    })
-  }
+    });
+  };
 
   const filterUserGoals = () => {
-    const userGoals = props.goalData.filter(goal => goal.attributes.user_id === Number(props.currentUser.id))
-    return userGoals
-  }
+    const userGoals = props.goalData.filter(
+      goal => goal.attributes.user_id === Number(props.currentUser.id)
+    );
+    return userGoals;
+  };
 
   const filterUserUpdates = () => {
-    const userUpdates = props.updateData.filter(update => update.attributes.user_id === Number(props.currentUser.id))
-    return userUpdates
-  }
-
-  const formatDateTime = goalDate => {
-    const options = { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' }
-    return new Date(goalDate).toLocaleDateString(undefined, options)
-  }
+    const userUpdates = props.updateData.filter(
+      update => update.attributes.user_id === Number(props.currentUser.id)
+    );
+    return userUpdates;
+  };
 
   const consolidatePoints = goalId => {
-    const supportTally = 
-    filterUserUpdates()
-    .filter(update => Number(update.attributes.goal_id) === goalId)
-    .map(update => update.attributes.supporters)
-    return supportTally.reduce((a, b) => a + b, 0)
-  }
+    const supportTally = filterUserUpdates()
+      .filter(update => Number(update.attributes.goal_id) === goalId)
+      .map(update => update.attributes.supporters);
+    return supportTally.reduce((a, b) => a + b, 0);
+  };
+
   const completeGoal = goalId => {
-    const totalPoints = consolidatePoints(goalId)
+    const totalPoints = consolidatePoints(goalId);
     props.goalUpdate({
       goalId: goalId,
       completed: true
-    })
+    });
     props.userUpdate({
       userId: props.currentUser.id,
-      score: Number(props.currentUser.attributes.score) + (totalPoints * 5)
-    })
-  }
+      score: Number(props.currentUser.attributes.score) + totalPoints * 5
+    });
+  };
 
   const archiveGoal = goalId => {
     props.goalUpdate({
       goalId: goalId,
       archived: true
-    })
-  }
+    });
+  };
 
   const useFetching = () => {
     useEffect(() => {
-      props.fetchAllGoals()
-      props.fetchAllUpdates()
-    }, [])
-  }
+      props.fetchAllGoals();
+      props.fetchAllUpdates();
+    }, []);
+  };
 
   return (
-    <div className={classes.div} >
+    <div className={classes.div}>
       {useFetching()}
-      <Paper elevation={3} square={false} className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        // variant="fullWidth"
-        centered
-      >
-        <Tab label="My Goals" />
-        <Tab label="My Updates" />
-        <Tab label="Archives" />
-      </Tabs>
-        <Divider />
+      {props.currentUser ? (
+        <Paper elevation={3} square={false} className={classes.root}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            // variant="fullWidth"
+            centered
+          >
+            <Tab label="My Goals" />
+            <Tab label="My Updates" />
+            <Tab label="Archives" />
+          </Tabs>
+          <Divider />
 
-        {editorPane.active ? 
-        <EditorPane 
-          closeEditorPane={closeEditorPane} 
-          editorPane={editorPane}
-          currentUser={props.currentUser}
-          filterUserGoals={filterUserGoals}
-          filterUserUpdates={filterUserUpdates}
-          /> 
-        : null}
+          {editorPane.active ? (
+            <EditorPane
+              closeEditorPane={closeEditorPane}
+              editorPane={editorPane}
+              currentUser={props.currentUser}
+              filterUserGoals={filterUserGoals}
+              filterUserUpdates={filterUserUpdates}
+            />
+          ) : null}
 
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <GoalContainer
-          openEditorPane={openEditorPane} 
-          filterUserGoals={filterUserGoals}
-          formatDateTime={formatDateTime}
-          completeGoal={completeGoal}
-          archiveGoal={archiveGoal}
-          />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-        <UserUpdatesContainer 
-          goalData={props.goalData}
-          openEditorPane={openEditorPane}
-          filterUserUpdates={filterUserUpdates}
-          formatDateTime={formatDateTime}
-          currentUser={props.currentUser}
-        />
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-        <ArchiveContainer 
-          openEditorPane={openEditorPane}
-          formatDateTime={formatDateTime}
-          filterUserGoals={filterUserGoals}
-          completeGoal={completeGoal}
-          archiveGoal={archiveGoal}
-        />
-        </TabPanel>
-      </Paper>
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <GoalContainer
+              openEditorPane={openEditorPane}
+              filterUserGoals={filterUserGoals}
+              formatDateTime={formatDateTime}
+              completeGoal={completeGoal}
+              archiveGoal={archiveGoal}
+            />
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <UserUpdatesContainer
+              goalData={props.goalData}
+              openEditorPane={openEditorPane}
+              filterUserUpdates={filterUserUpdates}
+              formatDateTime={formatDateTime}
+              currentUser={props.currentUser}
+            />
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            <ArchiveContainer
+              openEditorPane={openEditorPane}
+              formatDateTime={formatDateTime}
+              filterUserGoals={filterUserGoals}
+              completeGoal={completeGoal}
+              archiveGoal={archiveGoal}
+            />
+          </TabPanel>
+        </Paper>
+      ) : null}
     </div>
-  )
-}
+  );
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchAllGoals: () => dispatch(fetchAllGoals()),
   fetchAllUpdates: () => dispatch(fetchAllUpdates()),
   userUpdate: userInfo => dispatch(userUpdate(userInfo)),
-  goalUpdate: goalInfo => dispatch(goalUpdate(goalInfo)),
-})
+  goalUpdate: goalInfo => dispatch(goalUpdate(goalInfo))
+});
 
 const mapStateToProps = state => ({
   goalData: state.goals.goalList,
   updateData: state.updates.updateList
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserItemsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(UserItemsContainer);

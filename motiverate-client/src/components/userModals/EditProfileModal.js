@@ -42,6 +42,7 @@ const EditProfileModal = props => {
 
   const handleOpen = () => {
     setOpen(true);
+    setValues()
   };
 
   const handleClose = () => {
@@ -68,17 +69,23 @@ const EditProfileModal = props => {
     setEmail(event.target.value);
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const userInfo = {
+  const buildUserObj = () => {
+   const userInfo = {
       userId: props.currentUser.id,
       username,
-      password,
       first_name: firstName,
       last_name: lastName,
       email
     };
+    if (!!password) {
+      userInfo.password = password
+    };
     props.userUpdate(userInfo)
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    buildUserObj()
     setUsername("");
     setPassword("");
     setFirstName("");
@@ -86,6 +93,14 @@ const EditProfileModal = props => {
     setEmail("");
     handleClose();
   };
+
+  const setValues = () => {
+    setUsername(props.currentUser.attributes.username);
+    setFirstName(props.currentUser.attributes.full_name.split(" ")[0])
+    setLastName(props.currentUser.attributes.full_name.split(" ")[1])
+    setEmail(props.currentUser.attributes.email)
+  }
+
 
   return (
     <>

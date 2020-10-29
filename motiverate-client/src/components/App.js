@@ -12,6 +12,13 @@ import UpdatesContainer from "../containers/UpdatesContainer";
 
 
 class App extends Component {
+  // constructor(props) {
+  //   super()
+  //   this.state = {
+  //     currentUser: props.currentUser
+  //   }
+  // }
+
   componentDidMount() {
     this.props.getProfileFetch();
   }
@@ -19,7 +26,7 @@ class App extends Component {
   handleLogOut = () => {
     // event.preventDefault()
     // Remove the token from localStorage
-    localStorage.removeItem("token");
+    window.localStorage.removeItem("token");
     // Remove the user object from the Redux store
     this.props.logoutUser();
   };
@@ -37,10 +44,12 @@ class App extends Component {
         )}
         <Switch>
           <Route path="/profile">
-            <ProfileContainer currentUser={this.props.currentUser.data} />
+            <ProfileContainer currentUser={this.props.currentUser}
+            handleLogOut={this.handleLogOut}
+             />
           </Route>
           <Route path="/updates">
-            <UpdatesContainer currentUser={this.props.currentUser.data} />
+            <UpdatesContainer currentUser={this.props.currentUser} />
           </Route>
           <Route exact path="/" component={LandingPageContainer} />
           {/* <Route path="/signup" component={SignUpForm} /> */}
