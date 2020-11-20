@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 
 
 export default function GoalList({
-  filterUserGoals, 
+  renderUserGoals, 
   formatDateTime,
   completeGoal,
   archiveGoal
@@ -54,9 +54,9 @@ export default function GoalList({
           </TableRow>
         </TableHead>
         <TableBody>
-          {!!filterUserGoals() ?
+          {!!renderUserGoals() ?
             
-            filterUserGoals()
+            renderUserGoals()
             .filter(goal => goal.attributes.archived === false)
             .map(goal => (
             <TableRow key={goal.id}>

@@ -6,6 +6,7 @@ import GoalList from '../components/GoalList'
 
 
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
@@ -26,9 +27,33 @@ const GoalContainer = ({
 }) => {
 
   const classes = useStyles();
+  const [sortQuery, setSortQuery] = React.useState(false)
 
+  const compareGoalCategory = (a, b) => {
+    let stringA = a.attributes.category
+    let stringB = b.attributes.category
+    if (stringA < stringB) {
+      return -1;
+    }
+    if (stringA > stringB) {
+      return 1;
+    }
+  else {
+    return 0;
+  }
+  }
 
+  const sortGoalsByCategory = () => {
+    return filterUserGoals().sort(compareGoalCategory)
+  }
 
+  const handleSortQuery = () => {
+    setSortQuery(!sortQuery)
+  }
+
+  const renderUserGoals = () => {
+    return sortQuery ? sortGoalsByCategory() : filterUserGoals()
+  }
 
   return (
     <div>
@@ -37,10 +62,24 @@ const GoalContainer = ({
           <Button onClick={() => openEditorPane("goal", "new")}>New Goal</Button>
           <Button onClick={() => openEditorPane("goal", "edit")}>Edit Goal</Button>
           <Button onClick={() => openEditorPane("goal", "delete")}>Delete Goal</Button>
+          {
+            sortQuery ? 
+            <Button 
+              onClick={handleSortQuery}
+              color="secondary"
+              >
+               <strong>
+               Sort by Category A-Z
+               </strong>
+            </Button>
+            :
+            <Button onClick={handleSortQuery}>Sort by Category A-Z</Button>
+          }
         </ButtonGroup>
-
+        
         <GoalList 
-         filterUserGoals={filterUserGoals}
+         renderUserGoals={renderUserGoals}
+         sortQuery={sortQuery}
          formatDateTime={formatDateTime}
          completeGoal={completeGoal}
          archiveGoal={archiveGoal}
